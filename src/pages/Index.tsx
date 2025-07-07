@@ -169,7 +169,7 @@ const Index = () => {
           <CardContent className="space-y-4">
             <div className="flex justify-center">
               <img
-                src="/img/045335f0-dd3d-477f-ad2f-077a45102224.jpg"
+                src="/img/fb22ae99-b2ee-4cea-bafa-7e9dd31e003a.jpg"
                 alt="СКЕБОБ"
                 className="w-48 h-32 object-cover rounded-lg border-2 border-purple-400"
               />
@@ -258,21 +258,20 @@ const Index = () => {
 
   // Игровой экран
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-300 to-purple-800 relative overflow-hidden">
-      {/* Фон */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-200 to-purple-900 opacity-80"></div>
+    <div className="min-h-screen bg-gradient-to-b from-sky-300 to-green-400 relative overflow-hidden">
+      {/* Городской фон */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-200 to-green-300 opacity-80"></div>
 
-      {/* Летающие элементы */}
+      {/* Облака */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-3 h-3 bg-white rounded-full opacity-60 animate-ping"
+            className="absolute w-12 h-6 bg-white rounded-full opacity-70"
             style={{
               left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 2}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
+              top: `${Math.random() * 60}%`,
+              animation: `float ${3 + Math.random() * 2}s ease-in-out infinite`,
             }}
           />
         ))}
@@ -292,7 +291,7 @@ const Index = () => {
 
         {/* Земля */}
         <div
-          className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-gray-600 to-gray-400 border-t-4 border-gray-700"
+          className="absolute bottom-0 w-full h-20 bg-gradient-to-t from-yellow-700 to-yellow-500 border-t-4 border-yellow-800"
           style={{ top: `${GROUND_Y + 60}px` }}
         />
 
@@ -302,17 +301,23 @@ const Index = () => {
           style={{
             left: "100px",
             top: `${playerY}px`,
-            transform: isJumping ? "rotate(-10deg)" : "rotate(0deg)",
+            transform: isJumping
+              ? "rotate(-15deg) scale(1.1)"
+              : "rotate(0deg) scale(1)",
           }}
         >
-          <img
-            src="/img/045335f0-dd3d-477f-ad2f-077a45102224.jpg"
-            alt="СКЕБОБ"
-            className="w-16 h-16 object-cover rounded-lg border-4 border-purple-600 shadow-lg"
-            style={{
-              filter: isJumping ? "brightness(1.2)" : "brightness(1)",
-            }}
-          />
+          <div className="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 border-4 border-red-700 rounded-lg flex items-center justify-center overflow-hidden shadow-lg">
+            <img
+              src="/img/fb22ae99-b2ee-4cea-bafa-7e9dd31e003a.jpg"
+              alt="СКЕБОБ"
+              className="w-full h-full object-cover rounded-sm"
+              style={{
+                filter: isJumping
+                  ? "brightness(1.3) contrast(1.1)"
+                  : "brightness(1)",
+              }}
+            />
+          </div>
         </div>
 
         {/* Препятствия - провода */}
@@ -330,13 +335,24 @@ const Index = () => {
             />
             {/* Электрические искры */}
             <div
-              className="absolute text-yellow-400 text-2xl animate-pulse"
+              className="absolute text-yellow-400 text-3xl animate-pulse"
               style={{
-                left: `${obstacle.x - 10}px`,
-                top: `${obstacle.y - 10}px`,
+                left: `${obstacle.x - 15}px`,
+                top: `${obstacle.y - 15}px`,
               }}
             >
               ⚡
+            </div>
+
+            {/* Дополнительные искры */}
+            <div
+              className="absolute text-yellow-300 text-xl animate-ping"
+              style={{
+                left: `${obstacle.x + 10}px`,
+                top: `${obstacle.y + 20}px`,
+              }}
+            >
+              ✨
             </div>
             {obstacle.type === "double" && (
               <>
@@ -365,13 +381,13 @@ const Index = () => {
 
         {/* Инструкции */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-4 py-2 rounded-lg text-center">
-          <p className="text-sm">ПРОБЕЛ или КЛИК для прыжка</p>
+          <p className="text-sm font-bold">ПРОБЕЛ или КЛИК для прыжка</p>
         </div>
 
         {/* Кнопка прыжка для мобильных */}
         <Button
           onClick={jump}
-          className="absolute bottom-4 right-4 w-16 h-16 bg-purple-500 hover:bg-purple-600 text-white font-bold text-2xl border-4 border-purple-700 shadow-lg rounded-full"
+          className="absolute bottom-4 right-4 w-20 h-20 bg-red-500 hover:bg-red-600 text-white font-bold text-3xl border-4 border-red-700 shadow-lg rounded-full transform hover:scale-110 transition-all"
         >
           ⬆️
         </Button>
