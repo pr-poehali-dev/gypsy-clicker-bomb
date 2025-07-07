@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Impact:wght@400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -97,5 +99,16 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) rotate(360deg);
+    opacity: 0;
   }
 }
